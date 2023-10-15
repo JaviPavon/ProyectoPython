@@ -61,6 +61,62 @@ def ListarEquipos():
       print(equipo)
 
 
+def CalcularPuntos(data):
+    # Inicializar un diccionario para realizar un seguimiento de los puntos de cada equipo
+    puntos_equipo = {}
+
+    # Procesar los datos de los partidos
+    for partido in data:
+        equipo_local = partido["HomeTeam"]
+        equipo_visitante = partido["AwayTeam"]
+        marcador_local = partido["HomeTeamScore"]
+        marcador_visitante = partido["AwayTeamScore"]
+
+        # Determinar el resultado del partido y otorgar puntos a los equipos
+        if marcador_local > marcador_visitante:
+            if equipo_local in puntos_equipo:
+                puntos_equipo[equipo_local] = puntos_equipo.get(equipo_local, 0) + 3
+            else:
+                puntos_equipo[equipo_local] = 3
+
+        elif marcador_local < marcador_visitante:
+            if equipo_visitante in puntos_equipo:
+                puntos_equipo[equipo_visitante] = puntos_equipo.get(equipo_visitante, 0) + 3
+            else:
+                puntos_equipo[equipo_visitante] = 3
+
+        else:
+            # Empate
+            if equipo_local in puntos_equipo:
+                puntos_equipo[equipo_local] = puntos_equipo.get(equipo_local, 0) + 1
+            else:
+                puntos_equipo[equipo_local] = 1
+
+            if equipo_visitante in puntos_equipo:
+                puntos_equipo[equipo_visitante] = puntos_equipo.get(equipo_visitante, 0) + 1
+            else:
+                puntos_equipo[equipo_visitante] = 1
+
+    return puntos_equipo
+
+def Clasificacion():
+    puntos_equipo = CalcularPuntos(data)
+    clasificacion = sorted(puntos_equipo.items(), key=lambda x: x[1], reverse=True)
+
+    print("Clasificación de equipos:")
+    for posicion, (equipo, puntos) in enumerate(clasificacion, start=1):
+        print(f"{posicion}. {equipo}: {puntos} puntos")
+
+# Llama a la función Clasificacion para mostrar la clasificación de equipos
+Clasificacion()
+
+
+
+
+
+
+
+
 
 
 
