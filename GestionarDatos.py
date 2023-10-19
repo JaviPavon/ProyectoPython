@@ -108,9 +108,37 @@ def Clasificacion():
         print(f"{posicion}. {equipo}: {puntos} puntos")
 
 # Llama a la función Clasificacion para mostrar la clasificación de equipos
-Clasificacion()
+#Clasificacion()
 
+def MostrarDiferenciaDeGoles():
+    # Inicializar un diccionario para realizar un seguimiento de la diferencia de goles de cada equipo
+    diferencia_goles_equipo = {}
 
+    # Procesar los datos de los partidos
+    for partido in data:
+        equipo_local = partido["HomeTeam"]
+        equipo_visitante = partido["AwayTeam"]
+        goles_local = partido["HomeTeamScore"]
+        goles_visitante = partido["AwayTeamScore"]
+
+        # Calcular la diferencia de goles para el equipo local
+        if equipo_local in diferencia_goles_equipo:
+            diferencia_goles_equipo[equipo_local] += goles_local - goles_visitante
+        else:
+            diferencia_goles_equipo[equipo_local] = goles_local - goles_visitante
+
+        # Calcular la diferencia de goles para el equipo visitante
+        if equipo_visitante in diferencia_goles_equipo:
+            diferencia_goles_equipo[equipo_visitante] += goles_visitante - goles_local
+        else:
+            diferencia_goles_equipo[equipo_visitante] = goles_visitante - goles_local
+
+    print("Diferencia de goles de cada equipo:")
+    for equipo, diferencia in diferencia_goles_equipo.items():
+        print(f"{equipo}: {diferencia} goles")
+
+# Llama a la función MostrarDiferenciaDeGoles para mostrar la diferencia de goles
+MostrarDiferenciaDeGoles()
 
 
 
