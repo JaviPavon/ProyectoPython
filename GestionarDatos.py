@@ -1,19 +1,21 @@
 import requests
 
-# URL de la API
-# Realiza la solicitud GET
+#URL de la API
+#Realiza la solicitud GET
 response = requests.get('https://fixturedownload.com/feed/json/la-liga-2022')
 
-# Convierte la respuesta JSON en una lista de diccionarios de Python
+#Convierte la respuesta JSON en una lista de diccionarios de Python
 data = response.json()
 
+
+#Primera función ListarTodo
 def ListarTodo():
-# Ordena los datos por el campo 'MatchNumber' de menor a mayor
+#Ordena los datos por el campo 'MatchNumber' de menor a mayor
   datos = sorted(data, key=lambda x: x['MatchNumber'])
 
   #datos = sorted(data, key=lambda x: x['MatchNumber'], reverse=True)    (Ordenarlo de mayor a menor)
 
-# Ahora puedes trabajar con los datos ordenados
+#Ahora puedes trabajar con los datos ordenados
   for partido in datos:
       print("Partido:", partido['MatchNumber'])
       print("Fecha:", partido['DateUtc'])
@@ -24,7 +26,7 @@ def ListarTodo():
       print("Ronda:", partido['RoundNumber'])
       print()
 
-
+#Segunda función PartidosEquipo
 def BuscarEquipo(data, equipo):
   partidos_equipo = []
   for partido in data:
@@ -47,14 +49,14 @@ def PartidosEquipo():
       print(equipo_buscado," no está bien escrito o no ha jugado ningún partido en la lista proporcionada.")
 
 
-
+#Tercera función ListarEquipos
 def ListarEquipos():
-  equipos = set()  # Creamos un conjunto para almacenar los equipos
+  equipos = set()  #Creamos un conjunto para almacenar los equipos
 
   for partido in data:
-      equipos.add(partido["HomeTeam"])  # Agregamos el equipo local al conjunto
+      equipos.add(partido["HomeTeam"])  #Agregamos el equipo local al conjunto
 
-  equipos_lista = sorted(list(equipos))  # Convertimos el conjunto en una lista
+  equipos_lista = sorted(list(equipos))  #Convertimos el conjunto en una lista
 
   print("Lista de equipos:")
   for equipo in equipos_lista:
@@ -62,17 +64,17 @@ def ListarEquipos():
 
 
 def CalcularPuntos(data):
-    # Inicializar un diccionario para realizar un seguimiento de los puntos de cada equipo
+    #Inicializar un diccionario para realizar un seguimiento de los puntos de cada equipo
     puntos_equipo = {}
 
-    # Procesar los datos de los partidos
+    #Procesar los datos de los partidos
     for partido in data:
         equipo_local = partido["HomeTeam"]
         equipo_visitante = partido["AwayTeam"]
         marcador_local = partido["HomeTeamScore"]
         marcador_visitante = partido["AwayTeamScore"]
 
-        # Determinar el resultado del partido y otorgar puntos a los equipos
+        #Determinar el resultado del partido y otorgar puntos a los equipos
         if marcador_local > marcador_visitante:
             if equipo_local in puntos_equipo:
                 puntos_equipo[equipo_local] = puntos_equipo.get(equipo_local, 0) + 3
@@ -86,7 +88,7 @@ def CalcularPuntos(data):
                 puntos_equipo[equipo_visitante] = 3
 
         else:
-            # Empate
+            #Empate
             if equipo_local in puntos_equipo:
                 puntos_equipo[equipo_local] = puntos_equipo.get(equipo_local, 0) + 1
             else:
@@ -98,6 +100,7 @@ def CalcularPuntos(data):
                 puntos_equipo[equipo_visitante] = 1
 
     return puntos_equipo
+#Cuarta función Tabla de Clasificación
 
 def Clasificacion():
     puntos_equipo = CalcularPuntos(data)
@@ -105,29 +108,28 @@ def Clasificacion():
 
     print("Clasificación de equipos:")
     for posicion, (equipo, puntos) in enumerate(clasificacion, start=1):
-        print(f"{posicion}. {equipo}: {puntos} puntos")
+        print("{posicion}. {equipo}: {puntos} puntos")
 
-# Llama a la función Clasificacion para mostrar la clasificación de equipos
-#Clasificacion()
+#Quinta función DiferenciaGoles
 
 def MostrarDiferenciaDeGoles():
-    # Inicializar un diccionario para realizar un seguimiento de la diferencia de goles de cada equipo
+    #Inicializar un diccionario para realizar un seguimiento de la diferencia de goles de cada equipo
     diferencia_goles_equipo = {}
 
-    # Procesar los datos de los partidos
+    #Procesar los datos de los partidos
     for partido in data:
         equipo_local = partido["HomeTeam"]
         equipo_visitante = partido["AwayTeam"]
         goles_local = partido["HomeTeamScore"]
         goles_visitante = partido["AwayTeamScore"]
 
-        # Calcular la diferencia de goles para el equipo local
+        #Calcular la diferencia de goles para el equipo local
         if equipo_local in diferencia_goles_equipo:
             diferencia_goles_equipo[equipo_local] += goles_local - goles_visitante
         else:
             diferencia_goles_equipo[equipo_local] = goles_local - goles_visitante
 
-        # Calcular la diferencia de goles para el equipo visitante
+        #Calcular la diferencia de goles para el equipo visitante
         if equipo_visitante in diferencia_goles_equipo:
             diferencia_goles_equipo[equipo_visitante] += goles_visitante - goles_local
         else:
@@ -135,10 +137,46 @@ def MostrarDiferenciaDeGoles():
 
     print("Diferencia de goles de cada equipo:")
     for equipo, diferencia in diferencia_goles_equipo.items():
-        print(f"{equipo}: {diferencia} goles")
+        print("{equipo}: {diferencia} goles")
 
-# Llama a la función MostrarDiferenciaDeGoles para mostrar la diferencia de goles
-MostrarDiferenciaDeGoles()
+#Función para mostrar el menú y obtener la selección del usuario
+def Menu():
+    while True:
+        print("Menú:")
+        print("1. Listar todo")
+        print("2. Ver partidos de cualquier equipo")
+        print("3. Listar equipos de la liga")
+        print("4. Mostrar Clasificación de Equipos")
+        print("5. Mostrar Diferencia de Goles de Equipos")
+        print("6. Salir")
+        
+        opcion = input("Por favor, seleccione una opción (1/2/3): ")
+
+        if opcion == "1":
+            ListarTodo()
+        elif opcion == "2":
+            PartidosEquipo()
+        elif opcion == "3":
+            ListarEquipos()
+        elif opcion == "4":
+            Clasificacion()
+        elif opcion == "5":
+            MostrarDiferenciaDeGoles()
+        elif opcion == "6":
+            print("Saliendo del programa.")
+            break
+        else:
+            print("Opción no válida. Por favor, elija 1, 2, 3, 4, 5 o 6")
+
+#Llama a la función del menú para comenzar la interacción con el usuario
+Menu()
+
+
+
+
+
+
+
 
 
 
