@@ -108,7 +108,7 @@ def Clasificacion():
 
     print("Clasificación de equipos:")
     for posicion, (equipo, puntos) in enumerate(clasificacion, start=1):
-        print("{posicion}. {equipo}: {puntos} puntos")
+        print(posicion,"- ", equipo,": ", puntos," puntos")
 
 #Función para mostrar el menú y obtener la selección del usuario
 def Menu():
