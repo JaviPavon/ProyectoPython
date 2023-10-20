@@ -15,7 +15,6 @@ Al ejecutar el programa cos saltará un Menú con distintas funciones para reali
 
 4-Muestra una clasificación de todos los equipos según los partidos disputados
 
-5-Muestra la diferencia de goles de cada equipo
+5-Esta función esta echa para salir del menú
 
-6-Esta función esta echa para salir del menú
-
+Para ejecutarlo deberemos estar en la misma carpeta donde este el archivo .py y después en la terminal introducimos "python3 archivo.py" en este caso archivo es GestionarDatos.py

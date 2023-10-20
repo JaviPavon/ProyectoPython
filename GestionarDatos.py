@@ -59,8 +59,10 @@ def ListarEquipos():
   equipos_lista = sorted(list(equipos))  #Convertimos el conjunto en una lista
 
   print("Lista de equipos:")
+  print()
   for equipo in equipos_lista:
       print(equipo)
+      print()
 
 
 def CalcularPuntos(data):
