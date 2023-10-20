@@ -7,3 +7,15 @@ Ya dentro del entorno virtual ya podremos seguir trabajando, para utilizar mi pr
 
 Al ejecutar el programa cos saltará un Menú con distintas funciones para realizar, pasaré a explicar cada función:
 
+1-Listaría todo el JSON en sí con un buen formato para que sea leíble
+
+2-El programa le pide al usuario un equipo y el usuario según el quipo que introduzque, se le muestra sus partidos disputados
+
+3-Esta función te lista todos los equipos que están
+
+4-Muestra una clasificación de todos los equipos según los partidos disputados
+
+5-Muestra la diferencia de goles de cada equipo
+
+6-Esta función esta echa para salir del menú
+

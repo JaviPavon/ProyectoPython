@@ -163,7 +163,7 @@ def Menu():
         elif opcion == "5":
             MostrarDiferenciaDeGoles()
         elif opcion == "6":
-            print("Saliendo del programa.")
+            print("Saliendo del programa...")
             break
         else:
             print("Opción no válida. Por favor, elija 1, 2, 3, 4, 5 o 6")
