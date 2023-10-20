@@ -106,7 +106,7 @@ def CalcularPuntos(data):
 
 def Clasificacion():
     puntos_equipo = CalcularPuntos(data)
-    clasificacion = sorted(puntos_equipo.items(), key=lambda x: x[1], reverse=True)
+    clasificacion = sorted(puntos_equipo.items(), reverse=True)
 
     print("Clasificación de equipos:")
     for posicion, (equipo, puntos) in enumerate(clasificacion, start=1):
@@ -120,8 +120,7 @@ def Menu():
         print("2. Listar equipos de la liga")
         print("3. Ver partidos de cualquier equipo")
         print("4. Mostrar Clasificación de Equipos")
-        print("5. Mostrar Diferencia de Goles de Equipos")
-        print("6. Salir")
+        print("5. Salir")
         
         opcion = input("Por favor, seleccione una opción: ")
 
