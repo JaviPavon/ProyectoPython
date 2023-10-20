@@ -150,7 +150,7 @@ def Menu():
         print("5. Mostrar Diferencia de Goles de Equipos")
         print("6. Salir")
         
-        opcion = input("Por favor, seleccione una opción (1/2/3): ")
+        opcion = input("Por favor, seleccione una opción: ")
 
         if opcion == "1":
             ListarTodo()
@@ -170,21 +170,6 @@ def Menu():
 
 #Llama a la función del menú para comenzar la interacción con el usuario
 Menu()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   #Ejemplo de datos
 
