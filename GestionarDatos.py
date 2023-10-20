@@ -1,7 +1,5 @@
 import requests
 
-#URL de la API
-#Realiza la solicitud GET
 response = requests.get('https://fixturedownload.com/feed/json/la-liga-2022')
 
 #Convierte la respuesta JSON en una lista de diccionarios de Python
