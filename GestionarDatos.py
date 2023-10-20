@@ -110,42 +110,13 @@ def Clasificacion():
     for posicion, (equipo, puntos) in enumerate(clasificacion, start=1):
         print("{posicion}. {equipo}: {puntos} puntos")
 
-#Quinta función DiferenciaGoles
-
-def MostrarDiferenciaDeGoles():
-    #Inicializar un diccionario para realizar un seguimiento de la diferencia de goles de cada equipo
-    diferencia_goles_equipo = {}
-
-    #Procesar los datos de los partidos
-    for partido in data:
-        equipo_local = partido["HomeTeam"]
-        equipo_visitante = partido["AwayTeam"]
-        goles_local = partido["HomeTeamScore"]
-        goles_visitante = partido["AwayTeamScore"]
-
-        #Calcular la diferencia de goles para el equipo local
-        if equipo_local in diferencia_goles_equipo:
-            diferencia_goles_equipo[equipo_local] += goles_local - goles_visitante
-        else:
-            diferencia_goles_equipo[equipo_local] = goles_local - goles_visitante
-
-        #Calcular la diferencia de goles para el equipo visitante
-        if equipo_visitante in diferencia_goles_equipo:
-            diferencia_goles_equipo[equipo_visitante] += goles_visitante - goles_local
-        else:
-            diferencia_goles_equipo[equipo_visitante] = goles_visitante - goles_local
-
-    print("Diferencia de goles de cada equipo:")
-    for equipo, diferencia in diferencia_goles_equipo.items():
-        print("{equipo}: {diferencia} goles")
-
 #Función para mostrar el menú y obtener la selección del usuario
 def Menu():
     while True:
         print("Menú:")
         print("1. Listar todo")
-        print("2. Ver partidos de cualquier equipo")
-        print("3. Listar equipos de la liga")
+        print("2. Listar equipos de la liga")
+        print("3. Ver partidos de cualquier equipo")
         print("4. Mostrar Clasificación de Equipos")
         print("5. Mostrar Diferencia de Goles de Equipos")
         print("6. Salir")
@@ -155,18 +126,16 @@ def Menu():
         if opcion == "1":
             ListarTodo()
         elif opcion == "2":
-            PartidosEquipo()
-        elif opcion == "3":
             ListarEquipos()
+        elif opcion == "3":
+            PartidosEquipo()
         elif opcion == "4":
             Clasificacion()
         elif opcion == "5":
-            MostrarDiferenciaDeGoles()
-        elif opcion == "6":
             print("Saliendo del programa...")
             break
         else:
-            print("Opción no válida. Por favor, elija 1, 2, 3, 4, 5 o 6")
+            print("Opción no válida. Por favor, elija 1, 2, 3, 4 o 5")
 
 #Llama a la función del menú para comenzar la interacción con el usuario
 Menu()
