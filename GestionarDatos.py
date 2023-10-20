@@ -104,7 +104,7 @@ def CalcularPuntos(data):
 
 def Clasificacion():
     puntos_equipo = CalcularPuntos(data)
-    clasificacion = sorted(puntos_equipo.items(), reverse=True)
+    clasificacion = sorted(puntos_equipo.items(),key=lambda x: x[1], reverse=True)
 
     print("Clasificación de equipos:")
     for posicion, (equipo, puntos) in enumerate(clasificacion, start=1):
